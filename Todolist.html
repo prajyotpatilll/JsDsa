@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>jQuery To-Do List</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+  body { font-family: Arial; text-align: center; }
+  #todo-list { list-style: none; padding: 0; }
+  .done { text-decoration: line-through; color: gray; }
+</style>
+</head>
+<body>
+
+<h2>📝 To-Do List</h2>
+
+<input type="text" id="task-input" placeholder="Enter a task">
+<button id="add-btn">Add</button>
+<button id="clear-btn">Clear All</button>
+
+<ul id="todo-list"></ul>
+
+<script >
+    $(function() {
+  // Add task
+  $("#add-btn").click(function() {
+    const task = $("#task-input").val();
+    if (task.trim() !== "") {
+      $("#todo-list").append(`
+        <li>
+          <span class="task-text">${task}</span>
+          <button class="done-btn">Done</button>
+          <button class="delete-btn">Delete</button>
+        </li>
+      `);
+      $("#task-input").val("");
+    }
+  });
+
+  // Mark as done
+  $("#todo-list").on("click", ".done-btn", function() {
+    $(this).siblings(".task-text").toggleClass("done");
+  });
+
+  // Delete task
+  $("#todo-list").on("click", ".delete-btn", function() {
+    $(this).parent().fadeOut(300, function() {
+      $(this).remove();
+    });
+  });
+
+  // Clear all
+  $("#clear-btn").click(function() {
+    $("#todo-list").slideUp(300, function() {
+      $(this).empty().show();
+    });
+  });
+});
+</script>
+
+
+</body>
+</html>

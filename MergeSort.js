@@ -1,39 +1,34 @@
 let arr = [6, 5, 4, 3, 2, 1];
 
 function mergeSort(arr, l = 0, r = arr.length - 1) {
-    console.log("called")
+    console.log(`[${arr.slice(l, r + 1)}]`);
+
     if (l < r) {
         const mid = Math.floor((l + r) / 2);
 
-        console.log(`mergeSort called on arr[${l}..${mid}] ->`, arr.slice(l, mid + 1));
-
+        console.log("Merge Left");
         mergeSort(arr, l, mid);
 
-        console.log(`mergeSort called on arr[${mid + 1}..${r}] ->`, arr.slice(mid + 1, r + 1));
-
+        console.log("Merge Right");
         mergeSort(arr, mid + 1, r);
 
-        console.log(`Merging arr[${l}..${mid}] and arr[${mid + 1}..${r}]`);
-
+        console.log(`Merging [${arr.slice(l, mid + 1)}] and [${arr.slice(mid + 1, r + 1)}]`);
         merge(arr, l, mid, r);
-
-        console.log(`After merge arr[${l}..${r}] ->`, arr.slice(l, r + 1));
     }
 }
 
-function merge(arr, l, mid, r) { 
+function merge(arr, l, mid, r) {
+    console.log("arr:",arr , "l:" , l , "mid:" , mid , "r:" , r)
     const n1 = mid - l + 1;
     const n2 = r - mid;
 
     const left = new Array(n1);
     const right = new Array(n2);
 
-    for (let i = 0; i < n1; i++) {
-        left[i] = arr[l + i];
-    }
-    for (let j = 0; j < n2; j++) {
-        right[j] = arr[mid + 1 + j];
-    }
+    for (let i = 0; i < n1; i++) left[i] = arr[l + i];
+    for (let j = 0; j < n2; j++) right[j] = arr[mid + 1 + j];
+
+    console.log(`Left: ${left} | Right: ${right}`);
 
     let i = 0, j = 0, k = l;
 
@@ -52,6 +47,8 @@ function merge(arr, l, mid, r) {
     while (j < n2) {
         arr[k++] = right[j++];
     }
+
+    console.log(`After merge: [${arr.slice(l, r + 1)}]`);
 }
 
 mergeSort(arr);

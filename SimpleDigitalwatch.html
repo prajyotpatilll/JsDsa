@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Digital Watch</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0f0;
+    font-family: monospace;
+    font-size: 3rem;
+  }
+</style>
+</head>
+<body>
+
+<div id="time">00:00:00</div>
+
+<script>
+function updateTime() {
+  const now = new Date();
+  const hr = now.getHours().toString().padStart(2, '0');
+  const min = now.getMinutes().toString().padStart(2, '0');
+  const sec = now.getSeconds().toString().padStart(2, '0');
+  document.getElementById('time').textContent = `${hr}:${min}:${sec}`;
+}
+
+setInterval(updateTime, 1000);
+updateTime();
+</script>
+
+</body>
+</html>
